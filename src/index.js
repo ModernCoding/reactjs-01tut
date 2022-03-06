@@ -10,6 +10,6 @@ ReactDOM.render (
     <App />
   </React.StrictMode>,
 
-  document.querySelector ('body')
+  document.querySelector ('#root')
 
 )

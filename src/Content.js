@@ -6,10 +6,14 @@ const Content = () => {
     )
 
 
+  const handleClick = e => console.log (e.target)
+
+
   return (
 
     <main>
       <p>{ randomName }</p>
+      <button onClick={ e => handleClick (e) }>Click it</button>
     </main>
 
   )
