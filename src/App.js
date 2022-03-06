@@ -6,6 +6,13 @@ export default () => {
 
   const name = "Michel"
 
+  const handleNameChange = () =>
+
+    ((names, i) => names [ i ] ) (
+      [ 'Bob', 'Kevin', 'Dave' ],
+      Math.floor (Math.random () * 3)
+    )
+
 
   return (
 
@@ -29,6 +36,9 @@ export default () => {
         >
           Learn React
         </a>
+
+        <p>{ 2 * Math.sin (54 * Math.PI / 180) }</p>
+        <p>{ handleNameChange () }</p>
 
       </header>
 
