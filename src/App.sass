@@ -1,0 +1,19 @@
+@use "sass:math"
+
+$phi: 2 * math.sin(54deg)
+
+
+.App
+
+  background-color: #282c34
+  color: white
+  text-align: center
+
+  height: calc(100vh / $phi)
+  width: calc(100% / $phi)
+
+
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
