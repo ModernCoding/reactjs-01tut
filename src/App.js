@@ -4,6 +4,9 @@ import './App.css'
 
 export default () => {
 
+  const name = "Michel"
+
+
   return (
 
     <div className="App">
@@ -11,6 +14,8 @@ export default () => {
       <header className="App-header">
 
         <img src={ logo } className="App-logo" alt="logo" />
+
+        <h1>{ name }</h1>
 
         <p>
           Edit <code>src/App.js</code> and save to reload.
