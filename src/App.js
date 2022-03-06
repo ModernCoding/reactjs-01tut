@@ -4,7 +4,7 @@ import Footer from './Footer'
 import Header from './Header'
 
 
-export default () => (
+const App = () => (
 
     <div className="App">
       <Header />
@@ -13,3 +13,6 @@ export default () => (
     </div>
 
   )
+
+
+export default App

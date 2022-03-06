@@ -1,4 +1,4 @@
-export default () => {
+const Content = () => {
 
   const randomName = ((names, i) => names [ i ] ) (
       [ 'Bob', 'Kevin', 'Dave' ],
@@ -15,3 +15,6 @@ export default () => {
   )
 
 }
+
+
+export default Content
