@@ -1,19 +1,29 @@
+import { useState } from 'react'
+
+
 const Content = () => {
 
-  const randomName = ((names, i) => names [ i ] ) (
+  const [ name, setName ] = useState ('Dave')
+  const [ count, setCount ] = useState (0)
+
+  const handleCount = () => (i => setCount (++i)) (count)
+
+  const handleNameChange = () => ((names, i) => setName (names [ i ])) (
       [ 'Bob', 'Kevin', 'Dave' ],
       Math.floor (Math.random () * 3)
     )
 
 
-  const handleClick = e => console.log (e.target)
-
-
   return (
 
     <main>
-      <p>{ randomName }</p>
-      <button onClick={ e => handleClick (e) }>Click it</button>
+      
+      <p onClick={ handleCount }>
+        Hello { name } - { count }
+      </p>
+      
+      <button onClick={ handleNameChange }>Change Name</button>
+    
     </main>
 
   )
