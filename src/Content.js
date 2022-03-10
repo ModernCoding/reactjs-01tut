@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FaTrashAlt } from 'react-icons/fa'
 
 
 const Content = () => {
@@ -24,6 +25,26 @@ const Content = () => {
     }])
 
 
+  const handleCheck = id => {
+
+    (listItems => {
+      setItems (listItems)
+      localStorage.setItem ('shoppingList', JSON.stringify (listItems))
+    }) (items.map (i => i.id === id ? { ...i, checked: !i.checked} : i))
+
+  }
+
+
+  const handleDelete = id => {
+
+    (listItems => {
+      setItems (listItems)
+      localStorage.setItem ('shoppingList', JSON.stringify (listItems))
+    }) (items.filter (i => i.id !== id))
+
+  }
+
+
   return (
 
     <main>
@@ -37,13 +58,18 @@ const Content = () => {
                 id={`item-${ item.id }`}
                 type="checkbox"
                 checked={ item.checked }
+                onChange={ () => handleCheck (item.id) }
               />
               
               <label htmlFor={`item-${ item.id }`}>
                 { item.item }
               </label>
 
-              <button>Delete</button>
+              <FaTrashAlt
+                role="button"
+                tabIndex="0"
+                onClick={ () => handleDelete (item.id) }
+              />
             </li>  
           
           ))
