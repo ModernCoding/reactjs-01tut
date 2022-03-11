@@ -1,10 +1,13 @@
-const Footer = () => (
+const Footer = ({ length }) => (is =>
+
+  is &&= (
 
     <footer>
-      <p>Copyright &copy; { new Date ().getFullYear () }</p>
+      <p>{ length } { length > 1 ? 'items' : 'item' }</p>
     </footer>
 
   )
 
+) (length > 0)
 
 export default Footer
