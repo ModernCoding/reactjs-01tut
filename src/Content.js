@@ -1,4 +1,4 @@
-import { FaTrashAlt } from 'react-icons/fa'
+import ItemList from './ItemList'
 
 
 const Content = ({ items, handleCheck, handleDelete }) => {
@@ -9,32 +9,11 @@ const Content = ({ items, handleCheck, handleDelete }) => {
 
       { items.length ? (
 
-          <ul>
-            {
-              items.map (item => (
-                
-                <li className="item" key={ item.id }>
-                  <input
-                    id={`item-${ item.id }`}
-                    type="checkbox"
-                    checked={ item.checked }
-                    onChange={ () => handleCheck (item.id) }
-                  />
-                  
-                  <label htmlFor={`item-${ item.id }`}>
-                    { item.item }
-                  </label>
-
-                  <FaTrashAlt
-                    role="button"
-                    tabIndex="0"
-                    onClick={ () => handleDelete (item.id) }
-                  />
-                </li>  
-              
-              ))
-            }
-          </ul>
+          <ItemList
+            items={ items }
+            handleCheck={ handleCheck }
+            handleDelete={ handleDelete }
+          />
 
         ) : (
 
