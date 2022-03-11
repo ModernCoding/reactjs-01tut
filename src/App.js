@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
 import './App.sass'
+
+import AddItem from './AddItem'
 import Content from './Content'
 import Footer from './Footer'
 import Header from './Header'
@@ -54,6 +56,7 @@ const App = () => {
     <div className="App">
     
       <Header />
+      <AddItem />
 
       <Content
         items={ items }
