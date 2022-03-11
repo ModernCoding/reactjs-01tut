@@ -31,6 +31,9 @@ const App = () => {
     }])
 
 
+  const [ newItem, setNewItem ] = useState ('')
+
+
   const handleCheck = id => {
 
     (listItems => {
@@ -51,12 +54,25 @@ const App = () => {
   }
 
 
+  const handleSubmit = e => {
+
+    e.preventDefault ()
+    console.log (e.target)
+
+  }
+
+
   return (
 
     <div className="App">
     
       <Header />
-      <AddItem />
+
+      <AddItem
+        newItem={ newItem }
+        setNewItem={ setNewItem }
+        handleSubmit={ handleSubmit }
+      />
 
       <Content
         items={ items }
