@@ -4,7 +4,7 @@ const apiRequest
 
       try {
         
-        const response = fetch (url, optionsObj)
+        const response = await fetch (url, optionsObj)
 
         if (!response.ok) {
           throw Error ('Please reload the app!')

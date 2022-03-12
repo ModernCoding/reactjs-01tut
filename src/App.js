@@ -8,6 +8,8 @@ import Footer from './Footer'
 import Header from './Header'
 import SearchItem from './SearchItem'
 
+import apiRequest from './apiRequest'
+
 
 const App = () => {
 
@@ -63,9 +65,31 @@ const App = () => {
 
     (id =>
 
-      (items => setItems (items)) (
-        [ ...items, { id, checked: false, item } ]
-      )
+      (newItem =>
+
+        (async (items) => {
+
+          setItems (items)
+
+
+          const result = await apiRequest (API_URL, {
+            
+            method: 'post',
+            
+            headers: {
+              'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify (newItem)
+          
+          })
+
+
+          if (result) setFetchError (result)
+
+        }) ([ ...items, newItem ])
+
+      ) ({ id, checked: false, item })
 
     ) (items.length ? items [ items.length - 1 ].id + 1 : 1)
 
