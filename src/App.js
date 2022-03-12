@@ -127,9 +127,18 @@ const App = () => {
 
   const handleDelete = id => {
 
-    (listItems => setItems (listItems)) (
-      items.filter (i => i.id !== id)
-    )
+    (async listItems => {
+
+      setItems (listItems)
+
+      const result = await apiRequest (`${ API_URL }/${ id }`, {
+        method: 'DELETE'
+      })
+    
+
+      if (result) setFetchError (result)
+
+    }) (items.filter (i => i.id !== id))
 
   }
 
