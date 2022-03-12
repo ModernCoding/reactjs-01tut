@@ -74,7 +74,7 @@ const App = () => {
 
           const result = await apiRequest (API_URL, {
             
-            method: 'post',
+            method: 'POST',
             
             headers: {
               'Content-Type': 'application/json'
@@ -98,9 +98,29 @@ const App = () => {
 
   const handleCheck = id => {
 
-    (listItems => setItems (listItems)) (
-      items.map (i => i.id === id ? { ...i, checked: !i.checked} : i)
-    )
+    (async listItems => {
+    
+      setItems (listItems)
+
+      const item = listItems.find (i => i.id === id)
+
+
+      const result = await apiRequest (`${ API_URL }/${ id }`, {
+        
+        method: 'PATCH',
+        
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify ({ checked: item.checked })
+      
+      })
+    
+
+      if (result) setFetchError (result)
+    
+    }) (items.map (i => i.id === id ? { ...i, checked: !i.checked} : i))
 
   }
 
