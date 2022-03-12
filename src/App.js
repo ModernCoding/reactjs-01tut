@@ -11,20 +11,46 @@ import SearchItem from './SearchItem'
 
 const App = () => {
 
-  const [ items, setItems ]
+  const API_URL = 'http://localhost:3500/items'
 
-    = useState ((list => list ? JSON.parse (list) : []) (
-      localStorage.getItem ('shoppingList')
-    ))
+  // const [ items, setItems ]
+
+  //   = useState ((list => list ? JSON.parse (list) : []) (
+  //     localStorage.getItem ('shoppingList')
+  //   ))
 
 
+  const [ items, setItems ] = useState ([])
   const [ newItem, setNewItem ] = useState ('')
   const [ search, setSearch ] = useState ('')
-
+  const [ fetchError, setFetchError ] = useState (null)
 
   useEffect (() => {
-    localStorage.setItem ('shoppingList', JSON.stringify (items))
-  }, [ items ])
+
+    // localStorage.setItem ('shoppingList', JSON.stringify (items))
+  
+    (async () => {
+      
+      try {
+        
+        const response = await fetch (API_URL)
+
+        if (!response.ok) {
+          throw Error ('Did not receive expected data')
+        }
+
+        setItems (await response.json ())
+      
+      }
+
+
+      catch (error) {
+        console.log (error.message)
+      }
+
+    }) ()
+
+  }, [])
 
 
   const addItem = item => {
