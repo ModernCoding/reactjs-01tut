@@ -24,6 +24,7 @@ const App = () => {
   const [ newItem, setNewItem ] = useState ('')
   const [ search, setSearch ] = useState ('')
   const [ fetchError, setFetchError ] = useState (null)
+  const [ isLoading, setIsLoading ] = useState (true)
 
   useEffect (() => {
 
@@ -40,12 +41,17 @@ const App = () => {
         }
 
         setItems (await response.json ())
+        setFetchError (null)
       
       }
 
 
       catch (error) {
-        console.log (error.message)
+        setFetchError (error.message)
+      }
+
+      finally {
+        setIsLoading (false)
       }
 
     }) ()
@@ -114,18 +120,37 @@ const App = () => {
       />
 
 
-      <Content
-        
-        items={
-          items.filter (i =>
-            i.item.toLowerCase ().includes (search.toLowerCase ())
-          )
-        }
-        
-        handleCheck={ handleCheck }
-        handleDelete={ handleDelete }
+      <main>
 
-      />
+        { isLoading && <p>Loading...</p>}
+
+        {
+          fetchError ? (
+
+              <p>{`Error: ${ fetchError }`}</p>
+
+            ) : (
+
+              !isLoading && <Content
+                
+                items={
+                  items.filter (i =>
+                    i
+                      .item
+                      .toLowerCase ()
+                      .includes (search.toLowerCase ())
+                  )
+                }
+                
+                handleCheck={ handleCheck }
+                handleDelete={ handleDelete }
+
+              />
+
+            )
+        }
+
+      </main>
 
       
       <Footer

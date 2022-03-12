@@ -5,7 +5,7 @@ const Content = ({ items, handleCheck, handleDelete }) => {
 
   return (
 
-    <main>
+    <>
 
       { items.length ? (
 
@@ -22,8 +22,8 @@ const Content = ({ items, handleCheck, handleDelete }) => {
         ) 
         
       }
-      
-    </main>
+
+    </>
 
   )
 
