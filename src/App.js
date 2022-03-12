@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import './App.sass'
 
@@ -22,11 +22,16 @@ const App = () => {
   const [ search, setSearch ] = useState ('')
 
 
+  useEffect (() => {
+    localStorage.setItem ('shoppingList', JSON.stringify (items))
+  }, [ items ])
+
+
   const addItem = item => {
 
     (id =>
 
-      (items => setAndSaveItems (items)) (
+      (items => setItems (items)) (
         [ ...items, { id, checked: false, item } ]
       )
 
@@ -37,7 +42,7 @@ const App = () => {
 
   const handleCheck = id => {
 
-    (listItems => setAndSaveItems (listItems)) (
+    (listItems => setItems (listItems)) (
       items.map (i => i.id === id ? { ...i, checked: !i.checked} : i)
     )
 
@@ -46,14 +51,9 @@ const App = () => {
 
   const handleDelete = id => {
 
-    (listItems => setAndSaveItems (listItems)) (
+    (listItems => setItems (listItems)) (
       items.filter (i => i.id !== id)
     )
-
-  }
-
-
-  const handleSearch = search => {
 
   }
 
@@ -67,12 +67,6 @@ const App = () => {
     addItem (newItem)
     setNewItem ('')
 
-  }
-
-
-  const setAndSaveItems = items => {
-    setItems (items)
-    localStorage.setItem ('shoppingList', JSON.stringify (items))
   }
 
 
