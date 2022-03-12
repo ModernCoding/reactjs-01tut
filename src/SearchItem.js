@@ -1,4 +1,4 @@
-const SearchItem = ({ newItem, setNewItem, handleSubmit }) => {
+const SearchItem = ({ search, setSearch }) => {
 
   return (
 
@@ -14,6 +14,8 @@ const SearchItem = ({ newItem, setNewItem, handleSubmit }) => {
         id="search"
         role="searchbox"
         placeholder="Search Item"
+        value={ search }
+        onChange={ e => setSearch (e.target.value) }
       />
 
     </form>
