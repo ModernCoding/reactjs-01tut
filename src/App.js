@@ -10,46 +10,43 @@ import Header from './Header'
 
 const App = () => {
 
-  const [ items, setItems ] = useState ([{
+  const [ items, setItems ]
   
-        id: 1,
-        checked: false,
-        item: 'Item 1'
-  
-      }, {
-  
-        id: 2,
-        checked: false,
-        item: 'Item 2'
-  
-      }, {
-  
-        id: 3,
-        checked: false,
-        item: 'Item 3'
-  
-    }])
+    = useState ((list => list ? JSON.parse (list) : []) (
+      localStorage.getItem ('shoppingList')
+    ))
 
 
   const [ newItem, setNewItem ] = useState ('')
 
 
+  const addItem = item => {
+
+    (id =>
+
+      (items => setAndSaveItems (items)) (
+        [ ...items, { id, checked: false, item } ]
+      )
+
+    ) (items.length ? items [ items.length - 1 ].id + 1 : 1)
+
+  }
+
+
   const handleCheck = id => {
 
-    (listItems => {
-      setItems (listItems)
-      localStorage.setItem ('shoppingList', JSON.stringify (listItems))
-    }) (items.map (i => i.id === id ? { ...i, checked: !i.checked} : i))
+    (listItems => setAndSaveItems (listItems)) (
+      items.map (i => i.id === id ? { ...i, checked: !i.checked} : i)
+    )
 
   }
 
 
   const handleDelete = id => {
 
-    (listItems => {
-      setItems (listItems)
-      localStorage.setItem ('shoppingList', JSON.stringify (listItems))
-    }) (items.filter (i => i.id !== id))
+    (listItems => setAndSaveItems (listItems)) (
+      items.filter (i => i.id !== id)
+    )
 
   }
 
@@ -57,8 +54,18 @@ const App = () => {
   const handleSubmit = e => {
 
     e.preventDefault ()
-    console.log (e.target)
+    
+    if (!newItem) { return }
 
+    addItem (newItem)
+    setNewItem ('')
+
+  }
+
+
+  const setAndSaveItems = items => {
+    setItems (items)
+    localStorage.setItem ('shoppingList', JSON.stringify (items))
   }
 
 
